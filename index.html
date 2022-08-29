@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div id="controlPanel">
+      <form id="controlPanelForm">
+        <label for="numCubes">Cubes</label>
+        <input id="numCubes" name="numCubes" type="number" min="1" max="10" defaultValue="1"/>
+        <button id="updateNumCubes">Update</button>
+        <label for="firstCubeIdx">First Cube</label>
+        <input id="firstCubeIdx" name="firstCubeIdx" type="number" min="1" max="10" defaultValue="1"/>
+        <label for="secondCubeIdx">Second Cube</label>
+        <input id="secondCubeIdx" name="secondCubeIdx" type="number" min="1" max="10" defaultValue="2"/>
+        <button id="swapElementsBtn">Swap Elements</button>
+      </form>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
