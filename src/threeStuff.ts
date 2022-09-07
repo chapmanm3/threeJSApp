@@ -24,7 +24,7 @@ let cubes:Array<Mesh> = []
 function createCube() {
   let randomHeight = Math.random() * 3
   const geometry = new BoxGeometry(0.25, randomHeight, 0.25)
-  const material = new MeshBasicMaterial({color: 0x00ff00})
+  const material = new MeshBasicMaterial({color: 0xff00ff})
   const cube = new Mesh(geometry, material)
   cube.position.y = randomHeight / 2
   if(cubes.length > 0){
@@ -42,6 +42,10 @@ function registerSwapElementsButtonListener() {
   document.getElementById("swapElementsBtn")?.addEventListener('click', (event) => swapElements(event))
 }
 
+function registerSortElementsButtonListener() {
+  document.getElementById("sortElementsBtn")?.addEventListener('click', (event) => sortElements(event))
+}
+
 function swapElements(event: MouseEvent){
   const idx1 = document.getElementById("firstCubeIdx")?.valueAsNumber - 1;
   const idx2 = document.getElementById("secondCubeIdx")?.valueAsNumber - 1;
@@ -54,6 +58,11 @@ function swapElements(event: MouseEvent){
     cubes[idx2] = tempCube
   }
 
+}
+
+function sortElements(event: MouseEvent) {
+  event.preventDefault()
+  cubes.sort((a,b) => a.position.y - b.position.y)
 }
 
 function updateAnimation(e: MouseEvent) {
@@ -71,15 +80,17 @@ function updateAnimation(e: MouseEvent) {
       console.log("deleting cube")
       let cube = cubes.pop()
       console.log(cube)
-      cube?.geometry.dispose()
-      cube?.material.dispose()
+      cube?.removeFromParent()
     }
   }
+  const midCameraPosition = cubes.length / 2
+  controls.target.set(midCameraPosition, 0, 0)
 }
 
 export function threeJSCube(){
   registerFormListener()
   registerSwapElementsButtonListener()
+  registerSortElementsButtonListener()
 
   camera.position.z = 5
   camera.position.y = 5
